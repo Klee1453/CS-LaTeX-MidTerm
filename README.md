@@ -20,6 +20,8 @@
 6. 在 `contents/original.tex` 中填写翻译前的原始外文文献。
 7. 参考[下一节内容](#编译文档)编译文档。
 
+在生成用于最终装订的论文中的文献综述和开题报告时，需要取消 `contents/assessment.tex` 中关于评语和分数的注释，并根据实际情况填写。
+
 ## 编译文档
 
 ### 使用 VSCode 插件 LaTeX Workshop

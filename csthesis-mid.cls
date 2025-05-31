@@ -28,9 +28,14 @@
 
 % === 页面设置 ===
 % 纸张大小：A4
-% 页面边距：左 2.5cm；右 2cm；上 2.5cm；下 2cm；装订线 0cm
-\RequirePackage{geometry}	
-\geometry{inner=2.5cm, outer=2cm, top=2.5cm, bottom=2cm, bindingoffset=0cm}
+% 页面边距：左 2.5cm；右 2cm；上 2.5cm；下 2cm；装订线 0cm；页眉的下边缘与上边距的下边缘对齐；页脚的上边缘与下边距的上边缘对齐
+\RequirePackage{geometry}
+\geometry{
+    inner=2.5cm, outer=2cm, top=2.5cm+12pt, bottom=2cm+12pt, 
+    bindingoffset=0cm,
+    includeheadfoot=false, headheight=0pt, % footskip=12pt
+}
+
 \RequirePackage{subfigure}  % 导入subfigure宏包
 % 设置首行缩进2字符
 % 使用 \noindent 命令可以取消缩进
@@ -74,6 +79,7 @@
 {\CJKfamily{fs}\zihao{3}\bfseries\centering}
 {\chinese{section}、}{0pt}{}
 % 二级标题：小三号仿宋加粗
+% 这里有一点需要解释：计院给的开题报告模板要求此处subsection的格式为“1. 摘要”，而最终合并到论文的开题报告要求格式为 “1 摘要”，可能需要手动修改此处
 \titleformat{\subsection}[block]
 {\CJKfamily{fs}\zihao{-3}\bfseries}
 {\arabic{subsection}.}{0.5em}{}
@@ -121,7 +127,7 @@
 \renewcommand{\figurename}{\imageortable\bfseries 图}
 \renewcommand{\tablename}{\imageortable\bfseries 表}
 
-% 设置目录
+% 设置目录 这里有一点需要解释：计院给的开题报告模板要求此处subsection的格式为“1. 摘要”，而最终合并到论文的开题报告要求格式为 “1 摘要”，可能需要手动修改此处
 \RequirePackage{titletoc}
 \setcounter{tocdepth}{3}
 \renewcommand{\thesection}{\CJKfamily{Heiti}\chinese{section}、}
@@ -177,7 +183,7 @@
 % 阻止页面底部自动对齐
 \raggedbottom
 
-% 定义封装的环境
+% 定义封装的环境 文献综述和开题报告的具体要求
 \newenvironment{requirementtext}
 {%
   \begin{textblock}{155}(34.5,58.5)
@@ -185,5 +191,45 @@
     \linespread{1.8}\selectfont
 }%
 {%
+  \end{textblock}
+}
+
+% 导师对开题报告、外文翻译和文献综述的评语
+\newenvironment{assessmenttextAdvisor}
+{%
+  \begin{textblock}{148}(32,62)
+    \CJKfamily{fs}\zihao{4}\bfseries
+    \linespread{1.8}\selectfont
+}%
+{%
+  \end{textblock}
+}
+
+% 导师对开题报告、外文翻译和文献综述的成绩评定
+\newcommand{\assessmentscoreAdvisor}[3]{%
+  \begin{textblock}{50}(102,127)
+    \CJKfamily{fs}\zihao{4}\bfseries
+    \linespread{1.8}\selectfont
+    #1 \hspace{2.1cm} #2 \hspace{1.6cm} #3
+  \end{textblock}
+}
+
+% 盲审专家对开题报告、外文翻译和文献综述的评语
+\newenvironment{assessmenttextReviewer}
+{%
+  \begin{textblock}{148}(32,181)
+    \CJKfamily{fs}\zihao{4}\bfseries
+    \linespread{1.8}\selectfont
+}%
+{%
+  \end{textblock}
+}
+
+% 盲审专家对开题报告、外文翻译和文献综述的成绩评定
+\newcommand{\assessmentscoreReviewer}[3]{%
+  \begin{textblock}{50}(103,237.5)
+    \CJKfamily{fs}\zihao{4}\bfseries
+    \linespread{1.8}\selectfont
+    #1 \hspace{2.1cm} #2 \hspace{1.6cm} #3
   \end{textblock}
 }
